@@ -339,8 +339,17 @@ section { padding: 72px 0; }
   place-items: center;
   color: #fff;
   flex: none;
+  background: var(--bg-soft);
+  overflow: hidden;
   box-shadow: var(--shadow);
 }
+.app-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Legacy gradient fallbacks (kept for any remaining SVG icons) */
 .icon-lock   { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
 .icon-scan   { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
 .icon-vault  { background: linear-gradient(135deg, #ec4899, #f59e0b); }
