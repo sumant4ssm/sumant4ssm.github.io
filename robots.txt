@@ -1,0 +1,6 @@
+# AppCraft Digital — allow all crawlers
+User-agent: *
+Allow: /
+
+# Block nothing; the site is fully public and meant to be indexed.
+Sitemap: https://sumant4ssm.github.io/sitemap.xml
