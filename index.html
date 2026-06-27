@@ -3,98 +3,697 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AppCraft Digital</title>
-  <meta name="description" content="Developer website for AppCraft Digital apps, including AppLock Ultra support and policy links.">
+  <title>AppCraft Digital — Privacy-first Android apps</title>
+  <meta name="description" content="AppCraft Digital builds privacy-first Android utilities: AppLock Ultra, Multi Scanner Ultra, and Encrypted Gallery. Local-first, no tracking, your data stays yours.">
+  <meta name="theme-color" content="#0b0d12">
+  <meta property="og:title" content="AppCraft Digital">
+  <meta property="og:description" content="Privacy-first Android utilities. Local-first, no tracking, your data stays yours.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%236366f1'/%3E%3Cpath d='M50 18l26 10v18c0 16-11 28-26 36-15-8-26-20-26-36V28z' fill='none' stroke='white' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E">
   <style>
     :root {
       color-scheme: light dark;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f7f8fb;
-      color: #151820;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    main {
-      width: min(100%, 720px);
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      line-height: 1.05;
-    }
-
-    p {
-      margin: 0 0 24px;
-      max-width: 56ch;
-      color: #4c5565;
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    a {
-      border: 1px solid #d6dbe6;
-      border-radius: 8px;
-      color: #1f5eff;
-      font-weight: 650;
-      padding: 10px 14px;
-      text-decoration: none;
-    }
-
-    a:hover,
-    a:focus-visible {
-      border-color: #1f5eff;
-      outline: none;
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --bg: #f6f7fb;
+      --bg-elev: #ffffff;
+      --bg-soft: #eef0f6;
+      --text: #0f1220;
+      --text-soft: #525a72;
+      --text-mute: #818aa3;
+      --border: #e2e5ee;
+      --brand: #4f46e5;
+      --brand-2: #7c3aed;
+      --brand-3: #ec4899;
+      --accent: #06b6d4;
+      --ok: #10b981;
+      --warn: #f59e0b;
+      --shadow: 0 1px 2px rgba(15, 18, 32, 0.04), 0 8px 24px rgba(15, 18, 32, 0.06);
+      --shadow-lg: 0 20px 60px rgba(15, 18, 32, 0.12);
+      --radius: 18px;
+      --radius-sm: 12px;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        background: #111318;
-        color: #f5f7fb;
+        --bg: #0a0b10;
+        --bg-elev: #13151d;
+        --bg-soft: #1a1d28;
+        --text: #f4f6fb;
+        --text-soft: #b9c0d4;
+        --text-mute: #7d8499;
+        --border: #252a37;
+        --brand: #818cf8;
+        --brand-2: #a78bfa;
+        --brand-3: #f472b6;
+        --accent: #22d3ee;
+        --ok: #34d399;
+        --warn: #fbbf24;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
       }
+    }
 
-      p {
-        color: #b9c0ce;
-      }
+    * { box-sizing: border-box; }
 
-      a {
-        border-color: #303847;
-        color: #8fb1ff;
-      }
+    html { scroll-behavior: smooth; }
 
-      a:hover,
-      a:focus-visible {
-        border-color: #8fb1ff;
-      }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--brand); }
+
+    .wrap {
+      width: min(100% - 48px, 1120px);
+      margin-inline: auto;
+    }
+
+    /* ---------- Background flourish ---------- */
+    .aurora {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .aurora::before,
+    .aurora::after {
+      content: "";
+      position: absolute;
+      width: 60vw;
+      height: 60vw;
+      max-width: 720px;
+      max-height: 720px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.5;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .aurora::before {
+      top: -15%;
+      left: -10%;
+      background: radial-gradient(circle at 30% 30%, var(--brand), transparent 70%);
+    }
+    .aurora::after {
+      bottom: -20%;
+      right: -10%;
+      background: radial-gradient(circle at 70% 70%, var(--brand-3), transparent 70%);
+      animation-delay: -6s;
+    }
+    @media (prefers-color-scheme: dark) {
+      .aurora::before, .aurora::after { opacity: 0.32; }
+    }
+    @keyframes drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(6%, 4%) scale(1.12); }
+    }
+
+    /* ---------- Header ---------- */
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 64px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-3));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      flex: none;
+    }
+    .brand small {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-mute);
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.94rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: color .15s ease, background .15s ease;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-soft); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 96px 0 56px;
+      text-align: center;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      background: var(--bg-elev);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--ok);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
+      animation: pulse 2.4s ease-out infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent); }
+      70%  { box-shadow: 0 0 0 10px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+    h1 {
+      margin: 0 auto;
+      max-width: 18ch;
+      font-size: clamp(2.4rem, 6.4vw, 4.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+    h1 .grad {
+      background: linear-gradient(120deg, var(--brand), var(--brand-2) 45%, var(--brand-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p.lead {
+      margin: 22px auto 0;
+      max-width: 60ch;
+      font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+      color: var(--text-soft);
+    }
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 34px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(120deg, var(--brand), var(--brand-2));
+      color: #fff;
+      box-shadow: 0 10px 30px color-mix(in srgb, var(--brand) 40%, transparent);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px color-mix(in srgb, var(--brand) 50%, transparent); }
+    .btn-ghost {
+      background: var(--bg-elev);
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--brand); }
+
+    /* ---------- Stats strip ---------- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 56px auto 0;
+      max-width: 640px;
+    }
+    .stat {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat b {
+      display: block;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, var(--brand), var(--brand-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .stat span { font-size: 0.8rem; color: var(--text-mute); font-weight: 600; }
+
+    /* ---------- Section ---------- */
+    section { padding: 72px 0; }
+    .sec-head { text-align: center; max-width: 60ch; margin: 0 auto 48px; }
+    .sec-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+    .sec-head p { margin: 0; color: var(--text-soft); font-size: 1.05rem; }
+
+    /* ---------- App cards ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      position: relative;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-3));
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: color-mix(in srgb, var(--brand) 40%, var(--border));
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .app-icon {
+      width: 58px; height: 58px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      flex: none;
+      box-shadow: var(--shadow);
+    }
+    .icon-lock   { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    .icon-scan   { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+    .icon-vault  { background: linear-gradient(135deg, #ec4899, #f59e0b); }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .badge-live {
+      color: var(--ok);
+      background: color-mix(in srgb, var(--ok) 16%, transparent);
+    }
+    .badge-soon {
+      color: var(--warn);
+      background: color-mix(in srgb, var(--warn) 16%, transparent);
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 1.32rem;
+      letter-spacing: -0.01em;
+    }
+    .card p.desc {
+      margin: 0 0 18px;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+      min-height: 4.2em;
+    }
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 22px;
+      display: grid;
+      gap: 8px;
+    }
+    .features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+    .check {
+      flex: none;
+      width: 18px; height: 18px;
+      margin-top: 1px;
+      color: var(--ok);
+    }
+    .card .btn { width: 100%; justify-content: center; }
+    .card.disabled .btn {
+      cursor: not-allowed;
+      opacity: 0.85;
+    }
+
+    /* ---------- Values ---------- */
+    .values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+    .value {
+      text-align: center;
+      padding: 30px 22px;
+      border-radius: var(--radius);
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .value .vicon {
+      width: 52px; height: 52px;
+      margin: 0 auto 16px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--brand) 14%, transparent);
+      color: var(--brand);
+    }
+    .value h4 { margin: 0 0 8px; font-size: 1.08rem; }
+    .value p { margin: 0; color: var(--text-soft); font-size: 0.92rem; }
+
+    /* ---------- Footer ---------- */
+    footer.site {
+      border-top: 1px solid var(--border);
+      padding: 48px 0 60px;
+      margin-top: 40px;
+      background: var(--bg-soft);
+    }
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 32px;
+    }
+    .foot-grid p { color: var(--text-soft); font-size: 0.92rem; max-width: 38ch; }
+    .foot-col h5 {
+      margin: 0 0 12px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-mute);
+    }
+    .foot-col a {
+      display: block;
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.92rem;
+      padding: 5px 0;
+      transition: color .15s ease;
+    }
+    .foot-col a:hover { color: var(--brand); }
+    .foot-bottom {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--text-mute);
+      font-size: 0.86rem;
+    }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .aurora::before, .aurora::after, .dot { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 720px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { padding: 64px 0 40px; }
+      .stats { grid-template-columns: 1fr; }
+      .foot-grid { grid-template-columns: 1fr; }
+      section { padding: 56px 0; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>AppCraft Digital</h1>
-    <p>
-      AppCraft Digital publishes privacy-focused Android utilities including AppLock Ultra.
-      Use the links below for policy, terms, and support information.
-    </p>
-    <nav aria-label="Developer links">
-      <a href="https://sumant4ssm.github.io/applock-ultra-legal/">AppLock Ultra</a>
-      <a href="https://sumant4ssm.github.io/applock-ultra-legal/privacy-policy.html">Privacy Policy</a>
-      <a href="https://sumant4ssm.github.io/applock-ultra-legal/terms.html">Terms</a>
-      <a href="https://sumant4ssm.github.io/applock-ultra-legal/support.html">Support</a>
-    </nav>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="AppCraft Digital home">
+        <span class="logo" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/></svg>
+        </span>
+        <span>AppCraft Digital<small>Privacy-first apps</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#apps">Apps</a>
+        <a href="#values">Why us</a>
+        <a href="#legal">Legal</a>
+        <a class="btn btn-primary nav-cta" href="https://sumant4ssm.github.io/applock-ultra-legal/" target="_blank" rel="noopener">Get AppLock Ultra</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill"><span class="dot" aria-hidden="true"></span> Built in India · Available worldwide</span>
+        <h1>Privacy-first apps that <span class="grad">respect your data</span></h1>
+        <p class="lead">
+          AppCraft Digital crafts focused Android utilities that work offline, store data on your device,
+          and never sell you out. No accounts, no trackers, no nonsense — just apps that do one job well.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://sumant4ssm.github.io/applock-ultra-legal/" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5V3.5A1.5 1.5 0 0 1 4.5 2H15l6 6v12.5A1.5 1.5 0 0 1 19.5 22h-15A1.5 1.5 0 0 1 3 20.5zM8 12h8v1.5H8V12zm0 4h8v1.5H8V16z"/></svg>
+            Get AppLock Ultra
+          </a>
+          <a class="btn btn-ghost" href="#apps">Explore all apps</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>1</b><span>App live</span></div>
+          <div class="stat"><b>2</b><span>Coming soon</span></div>
+          <div class="stat"><b>0</b><span>Trackers</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apps -->
+    <section id="apps">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2>Our apps</h2>
+          <p>One flagship on the Play Store today, two more on the way. Each one earns its place on your phone.</p>
+        </div>
+        <div class="grid">
+          <!-- AppLock Ultra -->
+          <article class="card reveal">
+            <div class="card-head">
+              <span class="app-icon icon-lock" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              </span>
+              <span class="badge badge-live">● Available now</span>
+            </div>
+            <h3>AppLock Ultra</h3>
+            <p class="desc">Lock any app behind a PIN, pattern, or biometric gate. Intruder alerts, fake-cover disguise, and a stealthy vault keep nosy people out.</p>
+            <ul class="features">
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> PIN, pattern &amp; biometric unlock</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Intruder selfie alerts</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Fake cover &amp; stealth mode</li>
+            </ul>
+            <a class="btn btn-primary" href="https://sumant4ssm.github.io/applock-ultra-legal/" target="_blank" rel="noopener">View on Play Store</a>
+          </article>
+
+          <!-- Multi Scanner Ultra -->
+          <article class="card disabled reveal">
+            <div class="card-head">
+              <span class="app-icon icon-scan" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+              </span>
+              <span class="badge badge-soon">Coming soon</span>
+            </div>
+            <h3>Multi Scanner Ultra</h3>
+            <p class="desc">A local-first document scanner with OCR, barcode scanning, and smart PDF export. Everything stays on your device — nothing leaves it.</p>
+            <ul class="features">
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Offline OCR &amp; barcode scanning</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Folders, tags, favorites &amp; merge</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Local PDF &amp; image export</li>
+            </ul>
+            <button class="btn btn-ghost" type="button" disabled>Notify me at launch</button>
+          </article>
+
+          <!-- Encrypted Gallery -->
+          <article class="card disabled reveal">
+            <div class="card-head">
+              <span class="app-icon icon-vault" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>
+              </span>
+              <span class="badge badge-soon">Coming soon</span>
+            </div>
+            <h3>Encrypted Gallery</h3>
+            <p class="desc">A security-first photo and file vault. Import media, encrypt it on-device, and keep it behind biometric + PIN protection away from prying eyes.</p>
+            <ul class="features">
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> On-device encryption vault</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Biometric + PIN lock</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Inactivity lock &amp; tamper checks</li>
+            </ul>
+            <button class="btn btn-ghost" type="button" disabled>Notify me at launch</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section id="values">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2>Why AppCraft Digital</h2>
+          <p>Four principles we won't compromise on — no matter how the market shifts.</p>
+        </div>
+        <div class="values">
+          <div class="value reveal">
+            <div class="vicon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/></svg></div>
+            <h4>Privacy by default</h4>
+            <p>No analytics, no ad SDKs sipping your data. What happens on your phone stays on your phone.</p>
+          </div>
+          <div class="value reveal">
+            <div class="vicon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h4>Local-first</h4>
+            <p>Your documents and photos are processed and stored on your device. The cloud is optional, never required.</p>
+          </div>
+          <div class="value reveal">
+            <div class="vicon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>
+            <h4>Lightweight &amp; fast</h4>
+            <p>Each app does one job, without bloat. Quick to open, easy on battery, kind to older phones.</p>
+          </div>
+          <div class="value reveal">
+            <div class="vicon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 8L12 17l-6.5 4 2-8L2 9h7z"/></svg></div>
+            <h4>Built to last</h4>
+            <p>Modern Kotlin &amp; Jetpack Compose foundations, regularly updated, with clear policies you can actually read.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- Footer -->
+  <footer class="site" id="legal">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="brand" href="#top" style="margin-bottom:12px;">
+            <span class="logo" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/></svg>
+            </span>
+            <span>AppCraft Digital<small>Privacy-first apps</small></span>
+          </a>
+          <p>Independent Android studio building focused, offline-first utilities that put your privacy first.</p>
+        </div>
+        <div class="foot-col">
+          <h5>AppLock Ultra</h5>
+          <a href="https://sumant4ssm.github.io/applock-ultra-legal/" target="_blank" rel="noopener">Landing page</a>
+          <a href="https://sumant4ssm.github.io/applock-ultra-legal/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
+          <a href="https://sumant4ssm.github.io/applock-ultra-legal/terms.html" target="_blank" rel="noopener">Terms of Service</a>
+          <a href="https://sumant4ssm.github.io/applock-ultra-legal/support.html" target="_blank" rel="noopener">Support</a>
+        </div>
+        <div class="foot-col">
+          <h5>Connect</h5>
+          <a href="https://github.com/sumant4ssm" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:hello@appcraft.digital">Email</a>
+          <a href="#apps">Apps</a>
+          <a href="#values">Why us</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="year"></span> AppCraft Digital. All rights reserved.</span>
+        <span>Made with care · No cookies, no trackers.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
