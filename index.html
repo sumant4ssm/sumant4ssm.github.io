@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AppCraft Digital — Privacy-first Android apps</title>
-  <meta name="description" content="AppCraft Digital builds privacy-first Android utilities: AppLock Ultra, Multi Scanner Ultra, and Encrypted Gallery. Local-first, no tracking, your data stays yours.">
+  <meta name="description" content="AppCraft Digital builds privacy-first Android utilities: AppLock Ultra, Internet Velocity, Multi Scanner Ultra, and Encrypted Gallery. Local-first, no tracking, your data stays yours.">
   <meta name="theme-color" content="#0b0d12">
   <meta property="og:title" content="AppCraft Digital">
   <meta property="og:description" content="Privacy-first Android utilities. Local-first, no tracking, your data stays yours.">
@@ -346,6 +346,7 @@
     .icon-lock   { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
     .icon-scan   { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
     .icon-vault  { background: linear-gradient(135deg, #ec4899, #f59e0b); }
+    .icon-speed  { background: linear-gradient(135deg, #10b981, #06b6d4); }
 
     .badge {
       font-size: 0.72rem;
@@ -436,7 +437,7 @@
     }
     .foot-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-columns: 1.6fr repeat(auto-fit, minmax(150px, 1fr));
       gap: 32px;
     }
     .foot-grid p { color: var(--text-soft); font-size: 0.92rem; max-width: 38ch; }
@@ -533,7 +534,7 @@
         </div>
         <div class="stats">
           <div class="stat"><b>1</b><span>App live</span></div>
-          <div class="stat"><b>2</b><span>Coming soon</span></div>
+          <div class="stat"><b>3</b><span>Coming soon</span></div>
           <div class="stat"><b>0</b><span>Trackers</span></div>
         </div>
       </div>
@@ -600,6 +601,24 @@
             </ul>
             <button class="btn btn-ghost" type="button" disabled>Notify me at launch</button>
           </article>
+
+          <!-- Internet Velocity -->
+          <article class="card disabled reveal">
+            <div class="card-head">
+              <span class="app-icon icon-speed" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M3.5 18a9 9 0 0 1 17 0"/><path d="M12 2v2M4.2 6.2l1.4 1.4M19.8 6.2l-1.4 1.4M2 14h2M20 14h2"/></svg>
+              </span>
+              <span class="badge badge-soon">Coming soon</span>
+            </div>
+            <h3>Internet Velocity</h3>
+            <p class="desc">A real-time internet speed meter with session history, per-app data usage insights, and an optional local VPN-based app blocker.</p>
+            <ul class="features">
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Live download &amp; upload speed</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Per-app data usage stats</li>
+              <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> VPN-based app internet blocker</li>
+            </ul>
+            <button class="btn btn-ghost" type="button" disabled>Notify me at launch</button>
+          </article>
         </div>
       </div>
     </section>
@@ -658,9 +677,16 @@
           <a href="https://sumant4ssm.github.io/applock-ultra-legal/support.html" target="_blank" rel="noopener">Support</a>
         </div>
         <div class="foot-col">
+          <h5>Internet Velocity</h5>
+          <a href="https://sumant4ssm.github.io/internet-velocity-legal/" target="_blank" rel="noopener">Landing page</a>
+          <a href="https://sumant4ssm.github.io/internet-velocity-legal/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
+          <a href="https://sumant4ssm.github.io/internet-velocity-legal/terms.html" target="_blank" rel="noopener">Terms of Use</a>
+          <a href="https://sumant4ssm.github.io/internet-velocity-legal/support.html" target="_blank" rel="noopener">Support</a>
+        </div>
+        <div class="foot-col">
           <h5>Connect</h5>
           <a href="https://github.com/sumant4ssm" target="_blank" rel="noopener">GitHub</a>
-          <a href="mailto:hello@appcraft.digital">Email</a>
+          <a href="mailto:appcraftdigital@gmail.com">Email</a>
           <a href="#apps">Apps</a>
           <a href="#values">Why us</a>
         </div>
