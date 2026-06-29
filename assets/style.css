@@ -609,10 +609,20 @@ footer.site {
   border-radius: 22px;
 }
 .app-hero .app-icon svg { width: 42px; height: 42px; }
+.app-title-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin: 0 0 6px;
+}
 .app-hero h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   max-width: none;
-  margin: 0 0 6px;
+  margin: 0;
+}
+.app-status {
+  transform: translateY(2px);
 }
 .app-hero .tagline {
   color: var(--text-soft);
@@ -800,10 +810,18 @@ footer.site {
     margin-bottom: 18px;
   }
   .app-hero h1 {
-    font-size: clamp(1.65rem, 7vw, 2rem);
+    font-size: clamp(1.5rem, 6vw, 1.85rem);
     line-height: 1.12;
     overflow-wrap: anywhere;
     max-width: 100%;
+  }
+  .app-title-line {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .app-status {
+    margin-top: 10px;
+    transform: none;
   }
   .app-hero .tagline {
     font-size: 1rem;
@@ -813,10 +831,6 @@ footer.site {
     justify-content: flex-start;
     gap: 10px;
     margin-top: 24px;
-  }
-  .app-hero .cta .badge {
-    min-height: 32px;
-    padding: 6px 11px;
   }
   .app-hero .cta .btn {
     width: auto;
