@@ -13,11 +13,14 @@ the site indexed and understood, but ranking for competitive terms ("app lock",
 - [x] **Semantic HTML5** — `header`, `main`, `section`, `article`, `nav`, `aside`, one `<h1>` per page
 - [x] **Breadcrumb navigation** + `BreadcrumbList` structured data on app pages
 - [x] **Structured data (JSON-LD)**
-  - Homepage: `Organization` + `WebSite` (with `SearchAction`)
+  - Homepage: `Organization` + `WebSite`
   - Each app: `SoftwareApplication` + `FAQPage` + `BreadcrumbList`
 - [x] **FAQ sections** targeting "People also ask" queries for each app
-- [x] **Open Graph + Twitter Card** tags on every page
+- [x] **Open Graph + Twitter Card** tags on every page, including 1200×630 share images
 - [x] **`robots.txt`** (allow all) + **`sitemap.xml`** (all 5 pages)
+- [x] **Custom-domain canonicalization** — canonical URLs, `og:url`, JSON-LD URLs,
+  `robots.txt`, and `sitemap.xml` all use `https://appcraftdigital.co.in`
+- [x] **Clean schema** — removed placeholder ratings and invalid site-search markup
 - [x] **Internal linking** — every page links to every other page
 - [x] **Keyword-rich body copy** (no stuffing), mobile-responsive, fast (no JS frameworks)
 - [x] `<html lang="en">`, descriptive link text, `rel="noopener"` on external links
@@ -28,21 +31,16 @@ These have a **much bigger ranking impact** than any code change. Do them in ord
 
 ### 1. Google Search Console (highest priority)
 1. Go to https://search.google.com/search-console
-2. Add a property for `https://sumant4ssm.github.io` (URL prefix) **or** the
-   custom domain from Part C.
+2. Add a property for `https://appcraftdigital.co.in`.
 3. Verify ownership (GitHub Pages sites can be verified via the HTML tag method —
    paste the meta tag into each page's `<head>`, or use the Google Analytics method).
-4. Submit the sitemap: `https://sumant4ssm.github.io/sitemap.xml`
+4. Submit the sitemap: `https://appcraftdigital.co.in/sitemap.xml`
 5. Use **URL Inspection → Request Indexing** for each of the 5 pages.
 
-### 2. Get a custom domain (biggest single SEO boost)
-A `*.github.io` subdomain has low authority. Buying `appcraft.digital` (or similar)
-and pointing it at GitHub Pages:
-- Adds a permanent, brandable identity.
-- Lets you build **domain authority** over time that transfers across pages.
-- In Settings → Pages → Custom domain, add the domain and check **Enforce HTTPS**.
-- Then update every `canonical`, `og:url`, and the `sitemap.xml`/`robots.txt` URLs
-  in this repo from `sumant4ssm.github.io` to the new domain, and resubmit.
+### 2. GitHub Pages domain settings
+- In Settings → Pages, confirm the custom domain is `appcraftdigital.co.in`.
+- Enable **Enforce HTTPS** once GitHub allows it.
+- Keep the repo `CNAME` file set to `appcraftdigital.co.in`.
 
 ### 3. Backlinks (the main ranking currency)
 - Link to the site **from each app's Play Store listing** (Developer website field +
@@ -53,9 +51,8 @@ and pointing it at GitHub Pages:
 
 ### 4. Keep content fresh
 - Update `<lastmod>` in `sitemap.xml` whenever you change a page.
-- Add real screenshots and an icon image once available (OG image + `og:image` tag).
-- Replace the placeholder `aggregateRating` values on AppLock Ultra with **real**
-  Play Store ratings once you have them — fake/stale ratings can be flagged.
+- Add real app screenshots once available, especially on the app detail pages.
+- Add `aggregateRating` only after you have real public Play Store ratings.
 
 ### 5. Monitor
 - Check Search Console weekly for indexing errors, queries, and CTR.
